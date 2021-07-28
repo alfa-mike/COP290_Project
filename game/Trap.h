@@ -1,8 +1,8 @@
 #pragma once
 #include "GameObject.h"
 
-#define IMG_TRAP_INACTIVE "res/TrapInactive.png"
-#define IMG_TRAP_ACTIVE "res/TrapActive.png"
+#define IMG_TRAP_INACTIVE "src/TrapInactive.png"
+#define IMG_TRAP_ACTIVE "src/TrapActive.png"
 
 class MazeTrap :
 	public GameObject
