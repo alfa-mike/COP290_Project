@@ -1,34 +1,25 @@
 #include "GameObject.h"
-#include "TextureManager.h"
 
-GameObject::GameObject(const char* texsheet, SDL_Renderer* ren, int x , int y)
+GameObject::GameObject(std::shared_ptr<Room> room) :
+	curObjRoom(room),
+	objRenderer(room->roomRenderer),
+	objPos(room->roomPos)
 {
-    renderer = ren;
-    objTexture = TextureManager::LoadTexturefromFile(texsheet,ren);
-
-    xpos = x;
-    ypos = y;
-
+	SetObjectRect(&room->roomRect);
 }
 
-void GameObject::gUpdate()
-{
-    xpos ++;
-    ypos ++;
-
-    srcRect.h = 1400;
-    srcRect.w = 1200;
-    srcRect.x = 0;
-    srcRect.y = 0;
-
-    destRect.x = xpos;
-    destRect.y = ypos;
-    destRect.w = 64;
-    destRect.h = 64;
-    
+GameObject::GameObject(const GameObject &other): 
+	objRect(other.objRect),
+	objRenderer(other.objRenderer),
+	objPos(other.objPos),
+	curObjRoom(other.curObjRoom)
+{	
 }
 
-void GameObject::gRender()
+GameObject::GameObject()
 {
-    SDL_RenderCopy(renderer,objTexture,&srcRect,&destRect);
+}
+
+GameObject::~GameObject()
+{
 }
