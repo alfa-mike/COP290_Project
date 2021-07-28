@@ -3,10 +3,10 @@
 #include <random>
 
 #include "Room.h"	
-#include "MazeTrap.h"
-#include "MazeKey.h"
+#include "Trap.h"
+#include "Key.h"
 #include "MazeDoor.h"
-#include "MazeGuard.h"
+#include "Guard.h"
 
 //When To Start Obstacles
 #define TRAPS_START 2
