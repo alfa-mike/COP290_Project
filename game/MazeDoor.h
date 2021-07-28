@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-#define IMG_MAZEDOOR "res/Images/Lock.png"
+#define IMG_MAZEDOOR "src/Images/Lock.png"
 class MazeDoor :
 	public GameObject
 {
