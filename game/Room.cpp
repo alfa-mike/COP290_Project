@@ -1,89 +1,46 @@
 #include "Room.h"
 
-using namespace std;
+SDL_Texture *  Room::roomTextures[16];
 
-Room::Room(int i, int j, int rw) {
-  this->x = i;
-  this->y = j;
-  this->roomWidth = rw;
-  walls[0] = true;
-  walls[1] = true;
-  walls[2] = true;
-  walls[3] = true;
-  visited = false;
+Room::Room(Position pos, SDL_Renderer * renderer) : roomPos(pos)
+{
+	roomRenderer = renderer;
+
+	if(roomTextures[0] == NULL)
+	{
+		roomTextures[0b0000] = IMG_LoadTexture(roomRenderer, IMG_0BORDER);		//None
+		
+		roomTextures[0b0001] = IMG_LoadTexture(roomRenderer, IMG_1BORDER_D);	//Down
+		roomTextures[0b0010] = IMG_LoadTexture(roomRenderer, IMG_1BORDER_L);	//Left
+		roomTextures[0b0100] = IMG_LoadTexture(roomRenderer, IMG_1BORDER_U);	//Up
+		roomTextures[0b1000] = IMG_LoadTexture(roomRenderer, IMG_1BORDER_R);	//Right
+
+		roomTextures[0b0011] = IMG_LoadTexture(roomRenderer, IMG_2BORDER_DL);
+		roomTextures[0b0101] = IMG_LoadTexture(roomRenderer, IMG_2BORDER_DU);
+		roomTextures[0b1001] = IMG_LoadTexture(roomRenderer, IMG_2BORDER_DR);
+		roomTextures[0b0110] = IMG_LoadTexture(roomRenderer, IMG_2BORDER_LU);
+		roomTextures[0b1010] = IMG_LoadTexture(roomRenderer, IMG_2BORDER_LR);
+		roomTextures[0b1100] = IMG_LoadTexture(roomRenderer, IMG_2BORDER_UR);
+
+		roomTextures[0b0111] = IMG_LoadTexture(roomRenderer, IMG_3BORDER_DLU);
+		roomTextures[0b1011] = IMG_LoadTexture(roomRenderer, IMG_3BORDER_DLR);
+		roomTextures[0b1101] = IMG_LoadTexture(roomRenderer, IMG_3BORDER_DUR);
+		roomTextures[0b1110] = IMG_LoadTexture(roomRenderer, IMG_3BORDER_LUR);
+		
+		roomTextures[0b1111] = IMG_LoadTexture(roomRenderer, IMG_4BORDER);
+	}
+	curRoomTexture = roomTextures[0b1111];
 }
 
-void Room::removeWalls(Room &r) {
-  if (this->x - r.x == -1) {
-    this->removeWall(1);
-    r.removeWall(3);
-  } 
-  if (this->x - r.x == 1) {
-    this->removeWall(3);
-    r.removeWall(1);
-  } 
-  if (this->y - r.y == -1) {
-    this->removeWall(2);
-    r.removeWall(0);
-  } 
-  if (this->y - r.y == 1) {
-      this->removeWall(0);
-      r.removeWall(2);
-  } 
+Room::Room(const Room &other) :
+	roomPos(other.roomPos),
+	roomRect(other.roomRect), 
+	adjRooms(other.adjRooms), 
+	availRooms(other.availRooms), 
+	connectRooms(other.connectRooms)
+{
 }
 
-void Room::show(SDL_Renderer* renderer) {
-  int xCoord = this->x * roomWidth;
-  int yCoord = this->y * roomWidth;
-  if (this->walls[0]) {
-    SDL_RenderDrawLine(renderer, 
-                      xCoord, yCoord, 
-                      xCoord + this->roomWidth, yCoord);
-  }
-  if (this->walls[1]) {
-    SDL_RenderDrawLine(renderer, 
-                      xCoord + this->roomWidth, yCoord, 
-                      xCoord + this->roomWidth, yCoord + this->roomWidth);
-  }
-  if (this->walls[2]) {
-    SDL_RenderDrawLine(renderer, 
-                      xCoord, yCoord + this->roomWidth, 
-                      xCoord + this->roomWidth, yCoord + this->roomWidth);
-  }
-  if (this->walls[3]) {
-    SDL_RenderDrawLine(renderer, 
-                      xCoord, yCoord, 
-                      xCoord, yCoord + this->roomWidth);
-  }
-}
-
-void Room::printWalls() {
-  for (int i = 0; i < 4; i++) {
-    std::cout << walls[i] << " ";
-  }
-  std::cout << "\n";
-}
-
-void Room::removeWall(int w) {
-  this->walls[w] = false;
-}
-
-void Room::visit() {
-  this->visited = true;
-}
-
-int Room::getPositionInVector(int size) {
-  return this->x * size + this->y;
-}
-
-int Room::getX() {
-  return this->x;
-}
-
-int Room::getY() {
-  return this->y;
-}
-
-bool Room::isVisited() {
-  return this->visited;
+Room::~Room()
+{
 }
