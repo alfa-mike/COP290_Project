@@ -1,4 +1,4 @@
-#include "MazeKey.h"
+#include "Key.h"
 
 SDL_Texture * MazeKey::keyTexture;
 
