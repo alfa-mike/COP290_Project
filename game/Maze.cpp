@@ -30,19 +30,6 @@ Maze::Maze(const Maze &other) :
 Maze::Maze()
 {
 }
-/*
-Maze& Maze::operator=(const Maze &other)
-{
-	allRooms = other.allRooms;
-	allTraps = other.allTraps;
-	mazeX_RoomCount = other.mazeX_RoomCount;
-	mazeY_RoomCount = other.mazeY_RoomCount;
-	mazeKeyPtr = other.mazeKeyPtr;
-	mazeDoorPtr = other.mazeDoorPtr;
-	startPos = other.startPos;
-	finalPos = other.finalPos;
-	return *this;
-}*/
 
 Maze::~Maze()
 {
