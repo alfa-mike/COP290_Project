@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "Room.h"
 
-#define IMG_GUARD "res/Guard.png"
+#define IMG_GUARD "src/Guard.png"
 class MazeGuard :
 	public GameObject
 {
