@@ -1,4 +1,4 @@
-#include "MazeGuard.h"
+#include "Guard.h"
 
 SDL_Texture * MazeGuard::guardTexture;
 
