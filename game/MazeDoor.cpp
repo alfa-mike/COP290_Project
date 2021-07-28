@@ -3,7 +3,7 @@
 SDL_Texture * MazeDoor::doorTexture;
 
 MazeDoor::MazeDoor(std::shared_ptr<Room> setRoom) :
-	MazeObject::MazeObject(setRoom)
+	GameObject::GameObject(setRoom)
 {
 	if (doorTexture == NULL)
 	{

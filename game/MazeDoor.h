@@ -1,8 +1,8 @@
 #pragma once
-#include "MazeObject.h"
+#include "GameObject.h"
 #define IMG_MAZEDOOR "res/Images/Lock.png"
 class MazeDoor :
-	public MazeObject
+	public GameObject
 {
 private:
 	static SDL_Texture * doorTexture;
