@@ -12,9 +12,9 @@
 #include "Maze.h"
 
 
-#define IMG_TITLE "res/Title.png"
-#define IMG_GAMEOVER "res/GameOver.png"
-#define TEXTFILE "res/TitleFonts.ttf"
+#define IMG_TITLE "src/Title.png"
+#define IMG_GAMEOVER "src/GameOver.png"
+#define TEXTFILE "src/TitleFonts.ttf"
 
 
 int curWindowWidth = 1024;
