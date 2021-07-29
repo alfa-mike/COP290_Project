@@ -18,15 +18,15 @@
 
 
 int curWindowWidth = 1024;
-int curWindowHeight = 768;
+int curWindowHeight = 800;
 
 SDL_Rect FullScreen{ 0, 0, curWindowWidth, curWindowHeight };
 
 //Gameplay Area Display Parameters
-int GameArea_Width = 640;
+int GameArea_Width = 720;
 int GameArea_Height = 640;
 int GameArea_xOffset = 0;
-int GameArea_yOffset = (curWindowHeight - GameArea_Width);
+int GameArea_yOffset = (curWindowHeight - GameArea_Height);
 
 SDL_Rect GameAreaFillRect{	GameArea_xOffset, 
 							GameArea_yOffset, 
@@ -113,7 +113,7 @@ bool initialization()
 	else
 	{	
 		//Create window
-		window = SDL_CreateWindow("Maze Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, curWindowWidth, curWindowHeight, SDL_WINDOW_SHOWN);
+		window = SDL_CreateWindow("Maze Simulator Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, curWindowWidth, curWindowHeight, SDL_WINDOW_SHOWN);
 		if (window == NULL)
 		{
 			printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
@@ -166,7 +166,7 @@ void DrawTextFromRect(std::string text, SDL_Rect * textRect, int fontSize)
 		printf(TEXTFILE);
 		return;
 	}
-	SDL_Color fontColor = { 255, 255, 255, 255 };
+	SDL_Color fontColor = { 255, 255, 0, 255 };
 
 	SDL_Surface * textSurface = TTF_RenderText_Solid(font, text.c_str(), fontColor);
 
@@ -241,8 +241,8 @@ void DrawInGameGUI(std::string level, std::string steps, std::string lives)
 {
 	std::vector<std::string> infoTexts = {"Level", "Steps", "Lives", "Press R to Reset", "Press ESC to Menu" };
 	std::vector<std::string> dataTexts =  { level, steps, lives };
-	DrawTextFromRect("A MAZE GAME", &GameTitleFillRect, GameTitle_FontSize);
-	DrawTextMultipleRows(infoTexts, dataTexts, GameInfo_xOffset, GameInfo_yOffset, GameInfo_Width, GameInfo_Height, 50);
+	DrawTextFromRect("MAZE SIMULATOR GAME", &GameTitleFillRect, GameTitle_FontSize);
+	DrawTextMultipleRows(infoTexts, dataTexts, GameInfo_xOffset, GameInfo_yOffset, GameInfo_Width, GameInfo_Height, 40);
 }
 
 
@@ -354,7 +354,7 @@ void ResetToStart(std::shared_ptr<Maze> & maze, std::shared_ptr<Player> & player
 	*level = 1;
 	*steps = 0;
 	maze->SetMaze(3, 3, 1);
-	player->ResetPlayer(maze->FindRoomByPos(maze->startPos), 10);
+	player->ResetPlayer(maze->FindRoomByPos(maze->startPos), 5);
 	*lives = player->playerLives;
 	RenderAllGameObjects(maze, player, *steps);
 }
@@ -483,7 +483,7 @@ int main(int argc, char *argv[])
 						}
 					}
 					else {
-						std::cout << "Not a valid Key input!" << std::endl;
+						std::cout << "Invalid Key input!" << std::endl;
 					}
 					RenderAllGameObjects(curMaze, curPlayer, steps);
 				}
