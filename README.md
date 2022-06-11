@@ -1,4 +1,4 @@
-# COP290 Course Project
+# maze game
 This is a single player Maze Simulation Game . In this top-down 2D game, the player navigates progressively larger procedurally generated mazes, finding the key to get to the next level while avoiding obstacles.
 
 ## Features
